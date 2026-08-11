@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<title>Bir savol bor... 💌</title>
+<style>
+:root{--ink:#17131b;--pink:#ff5c8a;--pink2:#ff9fba;--cream:#fff8f3;--card:rgba(255,255,255,.78)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#fff4f7}
+body{overflow-x:hidden}.app{min-height:100svh;position:relative;display:flex;justify-content:center;overflow:hidden}
+.bg{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 15%,#ffd8e6 0,transparent 28%),radial-gradient(circle at 90% 10%,#ffe5b8 0,transparent 27%),linear-gradient(145deg,#fff8f3,#ffeef4 52%,#fff4d9)}
+.float{position:fixed;font-size:24px;opacity:.25;animation:float 7s ease-in-out infinite;z-index:0}.f1{left:7%;top:12%}.f2{right:8%;top:26%;animation-delay:1.5s}.f3{left:15%;bottom:15%;animation-delay:3s}.f4{right:14%;bottom:10%;animation-delay:4s}
+@keyframes float{50%{transform:translateY(-18px) rotate(8deg)}}
+.screen{width:min(100%,520px);min-height:100svh;padding:22px 18px 32px;display:none;position:relative;z-index:2;animation:enter .55s cubic-bezier(.2,.8,.2,1)}.screen.active{display:flex;flex-direction:column}
+@keyframes enter{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+.card{margin:auto;width:100%;padding:28px 20px;border:1px solid rgba(255,255,255,.8);background:var(--card);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:30px;box-shadow:0 25px 70px rgba(70,26,49,.14)}
+.eyebrow{text-align:center;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:#a34768;margin-bottom:10px}
+h1{font-size:clamp(34px,10vw,56px);line-height:.98;text-align:center;margin:0 0 16px;letter-spacing:-.05em}
+h2{font-size:31px;line-height:1.05;text-align:center;margin:0 0 9px;letter-spacing:-.035em}.sub{text-align:center;color:#6d5d65;line-height:1.5;margin:0 auto 22px;max-width:360px}
+.photo{width:170px;height:170px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 18px;border:7px solid #fff;box-shadow:0 16px 45px rgba(70,26,49,.18);animation:breath 3.2s ease-in-out infinite}
+@keyframes breath{50%{transform:translateY(-4px) rotate(1deg)}}
+.buttons{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:22px}.btn{border:0;border-radius:18px;padding:16px 14px;font-size:16px;font-weight:850;cursor:pointer;transition:.22s;min-height:54px}.yes{background:var(--ink);color:white;box-shadow:0 12px 25px rgba(23,19,27,.2)}.yes:active{transform:scale(.97)}.no{background:#fff;color:#555;border:1px solid #eee;position:relative}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}.choice{border:1px solid #eee;background:#fff;border-radius:22px;padding:18px 10px;cursor:pointer;font-weight:800;font-size:16px;box-shadow:0 8px 20px rgba(50,20,35,.06);transition:.2s}.choice:active{transform:scale(.97)}.choice .emoji{display:block;font-size:44px;margin-bottom:7px}.choice.activeChoice{outline:3px solid #ffb2c8}
+.dates{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:18px}.date{border:1px solid #eee;background:white;border-radius:17px;padding:12px 6px;text-align:center;cursor:pointer}.date strong{display:block;font-size:17px}.date small{color:#8b7b83}.date.selected{background:var(--ink);color:#fff}
+.times{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:14px}.time{border:1px solid #eee;background:#fff;border-radius:15px;padding:12px 4px;text-align:center;font-weight:800;cursor:pointer}.time.selected{background:#ff5c8a;color:#fff;border-color:#ff5c8a}
+.helper{text-align:center;font-size:12px;color:#8b7b83;margin-top:10px}.next{width:100%;margin-top:18px}
+.joke-img{width:180px;height:180px;display:block;margin:10px auto 14px;filter:drop-shadow(0 15px 25px rgba(0,0,0,.12))}
+.invite-preview{border-radius:24px;overflow:hidden;margin:0 auto 17px;position:relative}.invite-preview img{width:100%;height:310px;object-fit:cover;display:block}.invite-preview:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(0,0,0,.58))}
+.preview-text{position:absolute;z-index:1;left:16px;right:16px;bottom:15px;color:#fff;font-weight:850;font-size:18px}
+.summary{background:#fff;border-radius:20px;padding:15px;margin-top:14px;line-height:1.6}.summary b{display:block}.tiny{font-size:12px;color:#8b7b83}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:20}.heart{position:absolute;animation:rise 2.5s ease-out forwards;font-size:22px}@keyframes rise{to{transform:translateY(-90vh) rotate(30deg);opacity:0}}
+.hidden{display:none!important}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:30;padding:18px}
+.modal-box{width:min(100%,420px);background:#fff;border-radius:28px;padding:24px;box-shadow:0 24px 88px rgba(18,17,22,.25);text-align:center}
+.modal-box h3{font-size:28px;margin:0 0 12px}
+.modal-box p{color:#665a63;margin:0 0 20px;line-height:1.6}
+.modal-box .choice-grid{grid-template-columns:1fr 1fr 1fr;gap:10px}
+.modal-box .choice img{width:100%;height:120px;object-fit:cover;border-radius:20px}
+.modal-box .btn-secondary{background:#f3f2f8;color:#3f3151;border:1px solid #e3dfee}
+.modal-box .retry{margin-top:18px;padding:12px 18px;background:#ff5c8a;color:#fff;border:none;border-radius:18px;cursor:pointer}
+@media(max-width:360px){.card{padding:23px 15px}h1{font-size:35px}.photo{width:145px;height:145px}.dates{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="float f1">♡</div><div class="float f2">✦</div><div class="float f3">♡</div><div class="float f4">✿</div>
+<div class="app">
+
+<section class="screen active" id="s1"><div class="card">
+<div class="eyebrow">Senga kichkina savolim bor 💌</div>
+<img class="photo" src="images.png" alt="Surat">
+<h1>Uchrashuvga taklif qilaman.<br>Kelasanmi? 🥹</h1>
+<p class="sub">Birgina “Ha” desang, qolganini men hal qilaman. ✨</p>
+<div class="buttons"><button class="btn yes" onclick="go(2)">HA ❤️</button><button class="btn no" id="noBtn">YO‘Q 🙈</button></div>
+</div></section>
+
+<section class="screen" id="s2"><div class="card">
+<div class="eyebrow">1-bosqich</div><h2>Qayerda ko‘rishamiz? 🌙</h2><p class="sub">Ikki variant. Lekin ikkalasining ham oxiri chiroyli joyga olib boradi 😉</p>
+<div class="choice-grid"><button class="choice" onclick="pickPlace('Park')"><span class="emoji">🌳</span>Park</button><button class="choice" onclick="pickPlace('Restoran')"><span class="emoji">🍝</span>Restoran</button></div>
+</div></section>
+
+<section class="screen" id="s3"><div class="card">
+<div class="eyebrow">Sehrli burilish ✨</div><h2>Parda aylanamiz va...</h2><p class="sub">Parkndan so'ng syurpriz. 🌳 → 🍽️</p>
+<div style="font-size:74px;text-align:center;animation:breath 2s infinite">🎭</div>
+<button class="btn yes next" onclick="go(4)">Restoranga kiramiz →</button>
+</div></section>
+
+<section class="screen" id="s4"><div class="card">
+<div class="eyebrow">2-bosqich</div><h2>Qaysi oshxonani tanlaysan? 🍽️</h2><p class="sub">Bugun tanlov seniki.</p>
+<div class="choice-grid">
+<button class="choice" onclick="pickRestaurant('Yapon restorani')"><span class="emoji">🍣</span>Yaponcha</button>
+<button class="choice" onclick="pickRestaurant('Italyan restorani')"><span class="emoji">🍕</span>Italyancha</button>
+<button class="choice" onclick="pickRestaurant('Milliy restoran')"><span class="emoji">🍲</span>Milliy</button>
+</div></div></section>
+
+<section class="screen" id="s5"><div class="card">
+<div class="eyebrow">3-bosqich</div><h2>Qaysi kun bo‘shsan? 📅</h2><p class="sub">Bir kunni tanla — keyin vaqtni birga belgilaymiz.</p>
+<div class="dates" id="dates"></div>
+<div id="timeBox" class="hidden"><p class="helper">19:00 — 21:30 oralig‘ida ⏰</p><div class="times" id="times"></div><button class="btn yes next hidden" id="timeNext" onclick="go(6)">Davom etamiz →</button></div>
+</div></section>
+
+<section class="screen" id="s6"><div class="card">
+<div class="eyebrow">Eng muhim savol 😼</div><h2>Men do‘stim bilanman.<br>Kim bilandir kel!</h2><p class="sub">Kimni olib kelishingni o‘zing tanla. Faqat juda jiddiy tanlov emas 😄</p>
+<div class="choice-grid">
+<button class="choice" onclick="wrongCompanion('It 🐶')"><span class="emoji">🐶</span>It</button>
+<button class="choice" onclick="wrongCompanion('Mushuk 🐱')"><span class="emoji">🐱</span>Mushuk</button>
+<button class="choice" onclick="openFriendModal()"><span class="emoji">😌</span>Dugonam</button>
+</div>
+<div id="joke" class="hidden" style="text-align:center;margin-top:18px"><img class="joke-img" src="sticker.svg"><b>Hazillashma 😂</b><p class="tiny">Yana bir marta tanla...</p></div>
+</div></section>
+
+<section class="screen" id="s7"><div class="card">
+<div class="eyebrow">Bo‘ldi. Kelishdik. 💗</div>
+<div class="invite-preview"><img id="previewImage" src="girls.jpg" alt="Surat"><div class="preview-text">Uchrashguncha ✨<br><span style="font-weight:500">("Kutamiz intiqlik bilan" 🫶)</span></div></div>
+<h2>Uchrashguncha! 🥰</h2>
+<div class="summary" id="summary"></div>
+<p class="tiny" style="text-align:center;margin:14px 0 0">Tanloving saqlandi. Endi men tayyorlanaman. 😎</p>
+</div></section>
+
+<div class="modal hidden" id="friendModal">
+  <div class="modal-box">
+    <h3>Dugonani tanla</h3>
+    <p>Quyidagilardan birini tanlasang, oxirgi sahifaga o‘tasan.</p>
+    <div class="choice-grid">
+      <button class="choice" onclick="chooseFriend('girl.jpg')">
+        <img src="girl.jpg" alt="girl">
+      </button>
+      <button class="choice" onclick="chooseFriend('girl1.jfif')">
+        <img src="girl1.jfif" alt="girl1">
+      </button>
+      <button class="choice" onclick="chooseFriend('girl2.jfif')">
+        <img src="girl2.jfif" alt="girl2">
+      </button>
+    </div>
+    <div id="friendMessage" class="hidden" style="margin-top:18px;color:#b12f5c;font-weight:700"></div>
+    <button class="retry hidden" id="friendRetry" onclick="resetFriendModal()">Qayta tanlash</button>
+  </div>
+</div>
+
+</div><div class="confetti" id="confetti"></div>
+<script>
+let data={place:'',restaurant:'',date:'',time:'',companion:''};
+
+function go(n){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById('s'+n).classList.add('active');window.scrollTo(0,0);}
+
+const noBtn=document.getElementById('noBtn');
+let noClicks=0;
+function dodge(){
+ noClicks++;
+ const scale=Math.max(.08,1-noClicks*.16);
+ noBtn.style.transform=`scale(${scale})`;
+ noBtn.style.opacity=String(Math.max(.03,1-noClicks*.12));
+ if(noClicks>=7){noBtn.style.visibility='hidden';}
+ const x=(Math.random()*110-55),y=(Math.random()*90-45);
+ noBtn.style.position='relative';noBtn.style.left=x+'px';noBtn.style.top=y+'px';
+}
+noBtn.addEventListener('mouseenter',dodge);noBtn.addEventListener('touchstart',(e)=>{e.preventDefault();dodge()});noBtn.addEventListener('click',dodge);
+
+function pickPlace(v){data.place=v;if(v==='Park'){go(3)}else go(4)}
+function pickRestaurant(v){data.restaurant=v;buildDates();go(5)}
+function buildDates(){
+ const wrap=document.getElementById('dates');wrap.innerHTML='';
+ const now=new Date();
+ for(let i=1;i<=14;i++){let d=new Date(now);d.setDate(now.getDate()+i);
+  const days=['Yak','Dush','Sesh','Chor','Pay','Jum','Shan'];
+  const months=['yan','fev','mar','apr','may','iyun','iyul','avg','sen','okt','noy','dek'];
+  const b=document.createElement('button');b.className='date';b.innerHTML=`<strong>${d.getDate()}</strong><small>${months[d.getMonth()]}, ${days[d.getDay()]}</small>`;
+  b.onclick=()=>selectDate(b,d);wrap.appendChild(b);
+ }
+}
+function selectDate(btn,d){
+ document.querySelectorAll('.date').forEach(x=>x.classList.remove('selected'));btn.classList.add('selected');
+ data.date=d.toLocaleDateString('uz-UZ',{day:'2-digit',month:'2-digit',year:'numeric'});
+ document.getElementById('timeBox').classList.remove('hidden');
+ const times=document.getElementById('times');times.innerHTML='';
+ for(let h=19;h<=21;h++)for(let m of [0,30]){if(h===21&&m>30)continue;
+  let t=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
+  const b=document.createElement('button');b.className='time';b.textContent=t;b.onclick=()=>{document.querySelectorAll('.time').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');data.time=t;document.getElementById('timeNext').classList.remove('hidden')};times.appendChild(b);
+ }
+}
+function wrongCompanion(v){data.companion=v;const joke=document.getElementById('joke');joke.classList.remove('hidden');setTimeout(()=>{joke.classList.add('hidden')},1900)}
+function openFriendModal(){document.getElementById('friendModal').classList.remove('hidden');resetFriendModal();}
+function chooseFriend(choice){const message=document.getElementById('friendMessage');const retry=document.getElementById('friendRetry');
+ if(choice==='girl.jpg'){
+  data.companion='girl';document.getElementById('friendModal').classList.add('hidden');finish();
+ } else {
+  message.textContent='Seni shunday dugonang bormi?';message.classList.remove('hidden');retry.classList.remove('hidden');
+ }
+}
+function resetFriendModal(){const message=document.getElementById('friendMessage');const retry=document.getElementById('friendRetry');message.classList.add('hidden');retry.classList.add('hidden');}
+async function finish(){
+  const summary = document.getElementById('summary');
+  summary.innerHTML = '<span>⏳ Tanlovingiz yuborilmoqda...</span>';
+  try {
+    const response = await fetch('/api/booking', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        place: data.place,
+        restaurant: data.restaurant,
+        date: data.date,
+        time: data.time,
+        companion: data.companion
+      })
+    });
+    if (!response.ok) throw new Error('Server xatosi');
+    const result = await response.json();
+    if (!result.ok) throw new Error(result.message || 'Yuborilmadi');
+  } catch (err) {
+    console.error(err);
+  }
+  go(7);
+  document.getElementById('previewImage').src='girls.jpg';
+  document.getElementById('summary').innerHTML=`<b>📍 ${data.restaurant}</b><span>📅 ${data.date}</span><br><span>⏰ ${data.time}</span><br><span>🌙 Joy: ${data.place==='Park'?'Park → Restoran':'Restoran'}</span>`;
+  confetti();
+}
+function confetti(){const c=document.getElementById('confetti');c.innerHTML='';for(let i=0;i<28;i++){let s=document.createElement('span');s.className='heart';s.textContent=['💗','💕','✨','🌸'][Math.floor(Math.random()*4)];s.style.left=Math.random()*100+'%';s.style.top=(70+Math.random()*25)+'%';s.style.animationDelay=(Math.random()*.8)+'s';c.appendChild(s)}setTimeout(()=>c.innerHTML='',3000)}
+</script>
+</body></html>
