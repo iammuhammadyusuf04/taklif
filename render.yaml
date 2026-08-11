@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: taklif
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        value: 5932487414:AAEyVgXNrPdSAYmwEQbfmmDfsPhyaN9rRB4
+      - key: TELEGRAM_CHAT_ID
+        value: "1812245206"
