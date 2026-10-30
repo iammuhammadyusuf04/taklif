@@ -212,7 +212,7 @@ h2{font-family:var(--script);font-size:clamp(34px,9.5vw,44px);line-height:1.05;t
 <section class="screen" id="s5"><div class="card">
   <div class="eyebrow">3-bosqich</div><h2>Qaysi kun bo‘shsan? 📅</h2><p class="sub" style="margin-bottom:0">Bir kunni tanla — keyin vaqtni birga belgilaymiz.</p>
   <div class="dates" id="dates"></div>
-  <div id="timeBox" class="hidden"><p class="helper">19:00 — 21:30 oralig‘ida ⏰</p><div class="times" id="times"></div></div>
+  <div id="timeBox" class="hidden"><p class="helper">17:00 — 21:30 oralig‘ida ⏰</p><div class="times" id="times"></div></div>
   <button class="btn yes next hidden" id="timeNext">Davom etamiz →</button>
 </div></section>
 
@@ -381,7 +381,7 @@ function selectDate(btn,d){
   pickedDay=d;data.date=`${pad(d.getDate())}.${pad(d.getMonth()+1)}.${d.getFullYear()}`;data.time='';$('#timeNext').classList.add('hidden');
   $('#timeBox').classList.remove('hidden');
   const times=$('#times');times.innerHTML='';
-  for(let h=19;h<=21;h++)for(const m of [0,30]){
+  for(let h=17;h<=21;h++)for(const m of [0,30]){
     const t=`${pad(h)}:${pad(m)}`;const b=document.createElement('button');b.className='time';b.textContent=t;
     b.onclick=()=>{$$('.time').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');data.time=t;sparkleAt(b);
       data.when=new Date(d.getFullYear(),d.getMonth(),d.getDate(),h,m);$('#timeNext').classList.remove('hidden');
