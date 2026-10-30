@@ -21,3 +21,9 @@ BotFather'dan bot yarating. `TELEGRAM_BOT_TOKEN` — bot tokeni.
 `place`, `restaurant`, `date`, `time`, `companion`.
 
 `GET /health` serverni tekshiradi.
+
+## Shaxsiylashtirish
+Havolaga `?ism=` qo'shsangiz, sahifada qizning ismi chiqadi:
+`https://saytingiz.onrender.com/?ism=Madina`
+
+Rasm: `public/couple.png` (almashtirish uchun shu faylni yangilang).
