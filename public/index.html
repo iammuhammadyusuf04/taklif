@@ -152,7 +152,7 @@ h2{font-family:var(--script);font-size:clamp(34px,9.5vw,44px);line-height:1.05;t
 <span class="star" style="left:40%;top:5%;font-size:12px;animation-delay:-.5s">✦</span>
 <canvas id="bgfx"></canvas>
 
-<div class="progress" id="progress"><i>💗</i><i>💗</i><i>💗</i><i>💗</i><i>💗</i></div>
+<div class="progress" id="progress"><i>💗</i><i>💗</i><i>💗</i><i>💗</i></div>
 
 <div class="app">
 
@@ -216,18 +216,6 @@ h2{font-family:var(--script);font-size:clamp(34px,9.5vw,44px);line-height:1.05;t
   <button class="btn yes next hidden" id="timeNext">Davom etamiz →</button>
 </div></section>
 
-<!-- 6: hamroh -->
-<section class="screen" id="s6"><div class="card">
-  <div class="eyebrow">Eng muhim savol 😼</div><h2>Men do‘stim bilanman. Sen ham kim bilandir kel!</h2>
-  <p class="sub">Kimni olib kelishingni o‘zing tanla. Faqat juda jiddiy tanlov emas 😄</p>
-  <div class="choice-grid three" id="companions">
-    <button class="choice" data-c="It"><span class="emoji">🐶</span>It</button>
-    <button class="choice" data-c="Mushuk"><span class="emoji">🐱</span>Mushuk</button>
-    <button class="choice" data-c="Dugona"><span class="emoji">👭</span>Dugonam</button>
-  </div>
-  <div class="toast hidden" id="joke"></div>
-</div></section>
-
 <!-- 7: yakun -->
 <section class="screen" id="s7"><div class="card">
   <div class="eyebrow">Bo‘ldi. Kelishdik 💗</div>
@@ -247,7 +235,7 @@ h2{font-family:var(--script);font-size:clamp(34px,9.5vw,44px);line-height:1.05;t
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const data={place:'',restaurant:'',date:'',time:'',companion:'',when:null};
+const data={place:'',restaurant:'',date:'',time:'',when:null};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const rnd=(a,b)=>a+Math.random()*(b-a);
 const PALETTE=['#ff5c8a','#ff8fb0','#ff3d71','#ffb3c8','#e0306a','#ffd166','#ffffff'];
@@ -318,7 +306,7 @@ addEventListener('pointerdown',e=>{burst(e.clientX,e.clientY,reduce?4:10,{v:4,s:
 function go(n){
   $$('.screen').forEach(x=>x.classList.remove('active'));
   $('#s'+n).classList.add('active');window.scrollTo(0,0);
-  const pr=$('#progress');pr.classList.toggle('on',n>=2&&n<=6);
+  const pr=$('#progress');pr.classList.toggle('on',n>=2&&n<=5);
   $$('#progress i').forEach((el,i)=>el.classList.toggle('on',i<n-1));
   fireworks(false);
   if(n===1)typeTitle();
@@ -401,30 +389,14 @@ function selectDate(btn,d){
     times.appendChild(b);
   }
 }
-$('#timeNext').addEventListener('click',()=>go(6));
-
-/* ================= 6: hamroh ================= */
-const jokes={
-  'It':['Hazillashma 😂 It bilan restoranga kiritishmaydi!','Vov-vov! 🐶 Lekin men seni kutaman, it emas 😜'],
-  'Mushuk':['Miyov 🐱 Mushukka baliq beramiz, senga esa gul 🌹','Mushuk yaxshi, lekin dugonang yaxshiroq 😏']
-};
-let jokeTimer=null;
-$$('#companions .choice').forEach(b=>b.addEventListener('click',()=>{
-  const c=b.dataset.c;
-  if(c==='Dugona'){data.companion='Dugona';sparkleAt(b);finish();return}
-  data.companion=c;const j=$('#joke');const arr=jokes[c];j.textContent=arr[Math.floor(Math.random()*arr.length)];
-  j.classList.remove('hidden');j.style.animation='none';void j.offsetWidth;j.style.animation='';
-  b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');
-  add(fxL,{t:'e',e:c==='It'?'🐶':'🐱',x:b.getBoundingClientRect().left+40,y:b.getBoundingClientRect().top,vy:-2,s:34,life:60,fade:25});
-  clearTimeout(jokeTimer);jokeTimer=setTimeout(()=>j.classList.add('hidden'),2800);
-}));
+$('#timeNext').addEventListener('click',()=>{sparkleAt($('#timeNext'));finish()});
 
 /* ================= yuborish va yakun ================= */
 async function finish(){
   let ok=true;
   try{
     const res=await fetch('/api/booking',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({place:data.place,restaurant:data.restaurant,date:data.date,time:data.time,companion:data.companion})});
+      body:JSON.stringify({place:data.place,restaurant:data.restaurant,date:data.date,time:data.time})});
     const r=await res.json();if(!res.ok||!r.ok)throw new Error(r.message||'Yuborilmadi');
   }catch(err){console.error(err);ok=false}
   go(7);
@@ -437,8 +409,7 @@ function finale(){
     `<div class="row"><span>🍽️</span><span>${data.restaurant}</span></div>`+
     `<div class="row"><span>📅</span><span>${data.date}</span></div>`+
     `<div class="row"><span>⏰</span><span>${data.time}</span></div>`+
-    `<div class="row"><span>🌙</span><span>${park?'Park → Restoran':'Restoran'}</span></div>`+
-    `<div class="row"><span>👯</span><span>${data.companion==='Dugona'?'Dugonang bilan':'Sen va men'}</span></div>`;
+    `<div class="row"><span>🌙</span><span>${park?'Park → Restoran':'Restoran'}</span></div>`;
   tickCount();
   typeInto($('#letter'),LETTER,40);
   burst(innerWidth/2,innerHeight/2,50,{v:9,s:30,emoji:['💖','💕','🌸','✨']});

@@ -21,7 +21,6 @@ app.post("/api/booking", async (req, res) => {
     const restaurant = clean(req.body.restaurant);
     const date = clean(req.body.date);
     const time = clean(req.body.time);
-    const companion = clean(req.body.companion);
 
     if (!restaurant || !date || !time) {
       return res.status(400).json({ ok: false, message: "Booking ma'lumotlari to'liq emas." });
@@ -41,7 +40,6 @@ app.post("/api/booking", async (req, res) => {
 🍽 <b>Restoran:</b> ${escapeHtml(restaurant)}
 📅 <b>Sana:</b> ${escapeHtml(date)}
 ⏰ <b>Vaqt:</b> ${escapeHtml(time)}
-👯 <b>Hamroh:</b> ${escapeHtml(companion || "Ko'rsatilmagan")}
 
 ❤️ <i>Uchrashuv taklifi qabul qilindi!</i>`;
 

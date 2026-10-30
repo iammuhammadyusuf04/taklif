@@ -18,7 +18,7 @@ BotFather'dan bot yarating. `TELEGRAM_BOT_TOKEN` — bot tokeni.
 
 ## API
 `POST /api/booking`:
-`place`, `restaurant`, `date`, `time`, `companion`.
+`place`, `restaurant`, `date`, `time`.
 
 `GET /health` serverni tekshiradi.
 
